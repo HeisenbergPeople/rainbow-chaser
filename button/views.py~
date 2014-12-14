@@ -1,0 +1,6 @@
+from django.views.generic import TemplateView
+
+class addView(TemplateView):
+
+    template_name = "add.html"
+# Create your views here.

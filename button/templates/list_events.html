@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th> Date </th>
+      <th> Button </th>
+      <th> State </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in object_list %}
+    <tr>
+      <td> {{ event.datetime }} </td>
+      <td> {{ event.button }} </td>
+      <td> {{ event.state }} </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
