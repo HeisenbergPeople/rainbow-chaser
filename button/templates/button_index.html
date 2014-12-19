@@ -1,0 +1,12 @@
+<h1> ISensor Button Site </h1>
+
+<a href="{% url 'button_list' %}"> Lista </a>
+
+<p> Przyciski </p>
+<ul>
+{% for button in buttons %}
+<li>
+  <a href="{% url 'button_detail' button %}">{{ button }}</a>
+</li>
+{% endfor %}
+</ul>

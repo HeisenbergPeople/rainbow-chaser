@@ -1,10 +1,6 @@
-<p><a href="{% url 'button_index' %}"> Strona Główna </a></p>
-{% for button in buttons %}
-<a href="{% url 'button_list' button %}">{{ button }}</a>
-{% endfor %}
-{% if buttons|length > 1 %}
-<a href="{% url 'button_list' %}">all</a>
-{% endif %}
+<a href="{% url 'button_index' %}"> Strona Główna </a>
+
+<h1> Button {{ object.name }} </h1>
 
 <table>
   <thead>
@@ -15,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for event in events %}
+    {% for event in object.events.all %}
     <tr>
       <td> {{ event.datetime|date:"Y M d" }} {{ event.datetime|time:"H:i:s"}} </td>
       <td> {{ event.button }} </td>

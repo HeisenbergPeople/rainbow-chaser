@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 # Create your models here.
@@ -18,7 +19,9 @@ class Event(models.Model):
                              choices=state_choices,
                              default=False)
     datetime = models.DateTimeField()
-    button = models.ForeignKey(Button)
+
+    # button będzie widział eventy pod button.events
+    button = models.ForeignKey(Button, related_name='events')
 
     def __unicode__(self):
 
@@ -26,3 +29,4 @@ class Event(models.Model):
 
     class Meta:
         unique_together = (('button', 'datetime'),)
+        ordering = ['-datetime']
