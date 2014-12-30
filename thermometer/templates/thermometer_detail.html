@@ -1,0 +1,30 @@
+<a href="{% url 'thermometer_index' %}"> Strona Główna </a>
+
+<h1> Thermometer {{ object.name }} </h1>
+
+<p> Sensor {{ object.sensor.name }} </p>
+
+<table>
+  <thead>
+    <tr>
+      <th> Date </th>
+      <th> Thermometer </th>
+      <th> Temperature </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in object.events.all %}
+    <tr>
+      <td> {{ event.datetime|date:"Y M d" }} {{ event.datetime|time:"H:i:s"}} </td>
+      <td> {{ event.thermometer.name }} </td>
+      <td> {{ event.temperature }} </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td> --|-- </td>
+      <td> --|-- </td>
+      <td> --|-- </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

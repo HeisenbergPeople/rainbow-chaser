@@ -1,0 +1,3 @@
+<a href="{% url 'thermometer_index' %}"> Strona Główna </a>
+
+<h1> Thermometer {{ object.name }} </h1>

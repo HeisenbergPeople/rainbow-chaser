@@ -1,0 +1,55 @@
+{% extends 'thermometer_base.html' %}
+
+{% block nav %}
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Events <span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="{% url 'thermometer_list' %}">See Events</a></li>
+  </ul>
+</li>
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Thermometers <span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+    {% for thermometer in thermometers %}
+    <li><a href="{% url 'thermometer_detail' thermometer.name %}"> {{ thermometer.name }} </a></li>
+    {% endfor %}
+  </ul>
+</li>
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Sensors <span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+    {% for sensor in sensors %}
+    <li> <a href="{% url 'sensor_detail' sensor.name %}">{{ sensor.name }}</a> </li>
+    {% endfor %}
+  </ul>
+</li>
+{% endblock %}
+
+{% block header %}
+<h1>Thermometer</h1>
+<p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+{% endblock %}
+
+{% block headlines %}
+            <div class="col-xs-6 col-lg-4">
+              <h2>Events</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="{% url 'thermometer_list' %}" role="button">View Events List &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Thermometers</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              {% for thermometer in thermometers %}
+              <p><a class="btn btn-default" href="{% url 'thermometer_detail' thermometer.name %}" role="button">{{ thermometer.name }} &raquo;</a></p>
+              {% endfor %}
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Sensors</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              {% for sensor in sensors %}
+              <p><a class="btn btn-default" href="{% url 'sensor_detail' sensor.name %}" role="button">{{ sensor.name }} &raquo;</a></p>
+              {% endfor %}
+            </div><!--/.col-xs-6.col-lg-4-->
+{% endblock %}
