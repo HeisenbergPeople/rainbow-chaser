@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^button/', include('button.urls')),
+    url(r'^thermometer/', include('thermometer.urls')),
 )
