@@ -22,7 +22,6 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
   </head>
-
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -38,46 +37,29 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'thermometer_index' %}">Thermometer</a></li>
-
-            {% block nav %}
-
-            {% endblock %}
-            
+            {% block nav %} {% endblock %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-
     <div class="container">
-
       <div class="row row-offcanvas row-offcanvas-right">
-
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            {% block header %}
-
-            {% endblock %}
+            {% block header %} {% endblock %}
           </div>
           <div class="row">
-            
-            {% block headlines %}
-
-            {% endblock %}
+            {% block headlines %}{% endblock %}
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->
-
       </div><!--/row-->
 
       <hr>
-
-      {% block content %}
-
-      {% endblock %}
-
+      {% block content %}{% endblock %}
       <hr>
 
       <footer class="footer">
@@ -85,16 +67,13 @@
           <p class="text-muted"> Bradley IF UZ 2015 </p>
         </div>
       </footer>
-
     </div><!--/.container-->
-
 
     <!-- Bootstrap core JavaScript
          ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-
     <script src="/static/custom/offcanvas.js"></script>
   </body>
 </html>

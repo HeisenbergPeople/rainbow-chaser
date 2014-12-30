@@ -29,27 +29,27 @@
 
 {% block header %}
 <h1>Thermometer</h1>
-<p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+<p>Here you can find information about our thermomethers, sensors we use, and temperature they measurre.</p>
 {% endblock %}
 
 {% block headlines %}
-            <div class="col-xs-6 col-lg-4">
-              <h2>Events</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="{% url 'thermometer_list' %}" role="button">View Events List &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>Thermometers</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              {% for thermometer in thermometers %}
-              <p><a class="btn btn-default" href="{% url 'thermometer_detail' thermometer.name %}" role="button">{{ thermometer.name }} &raquo;</a></p>
-              {% endfor %}
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>Sensors</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              {% for sensor in sensors %}
-              <p><a class="btn btn-default" href="{% url 'sensor_detail' sensor.name %}" role="button">{{ sensor.name }} &raquo;</a></p>
-              {% endfor %}
-            </div><!--/.col-xs-6.col-lg-4-->
+<div class="col-xs-6 col-lg-4">
+  <h2>Events</h2>
+  <p>All temperature meassurements are called Events. Here you will find all records.</p>
+  <p><a class="btn btn-default" href="{% url 'thermometer_list' %}" role="button">View Events List &raquo;</a></p>
+</div><!--/.col-xs-6.col-lg-4-->
+<div class="col-xs-6 col-lg-4">
+  <h2>Thermometers</h2>
+  <p>You can identify the thermometers you're interested in.</p>
+  {% for thermometer in thermometers %}
+  <p><a class="btn btn-default" href="{% url 'thermometer_detail' thermometer.name %}" role="button">{{ thermometer.name }} &raquo;</a></p>
+  {% endfor %}
+</div><!--/.col-xs-6.col-lg-4-->
+<div class="col-xs-6 col-lg-4">
+  <h2>Sensors</h2>
+  <p>All about sensors we use to measure temperature.</p>
+  {% for sensor in sensors %}
+  <p><a class="btn btn-default" href="{% url 'sensor_detail' sensor.name %}" role="button">{{ sensor.name }} &raquo;</a></p>
+  {% endfor %}
+</div><!--/.col-xs-6.col-lg-4-->
 {% endblock %}
