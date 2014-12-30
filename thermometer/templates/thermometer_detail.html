@@ -1,30 +1,21 @@
-<a href="{% url 'thermometer_index' %}"> Strona Główna </a>
+{% extends 'thermometer_base.html' %}
 
-<h1> Thermometer {{ object.name }} </h1>
+{% block header %}
+<h1> Thermometer <b>{{ object.name }}</b> </h1>
+<p> {{ object.description }} </p>
+{% endblock %}
 
-<p> Sensor {{ object.sensor.name }} </p>
+{% block headlines %}
+<div class="col-xs-6 col-lg-4">
+  <h2>Sensor {{ object.sensor.name }}</h2>
+   <p><a class="btn btn-default" href="{% url 'sensor_detail' object.sensor.name %}" role="button">Details &raquo;</a></p>
+</div><!--/.col-xs-6.col-lg-4-->
+{% endblock %}
 
-<table>
-  <thead>
-    <tr>
-      <th> Date </th>
-      <th> Thermometer </th>
-      <th> Temperature </th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for event in object.events.all %}
-    <tr>
-      <td> {{ event.datetime|date:"Y M d" }} {{ event.datetime|time:"H:i:s"}} </td>
-      <td> {{ event.thermometer.name }} </td>
-      <td> {{ event.temperature }} </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td> --|-- </td>
-      <td> --|-- </td>
-      <td> --|-- </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+
+{% block content %}
+<h2> Last Events </h2>
+
+{% include 'event_table.html' with events=object.events.all|slice:":15" %}
+
+{% endblock %}
