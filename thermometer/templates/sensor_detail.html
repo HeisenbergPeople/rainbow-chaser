@@ -1,6 +1,13 @@
-<a href="{% url 'thermometer_index' %}"> Main Page </a>
+{% extends 'thermometer_base.html' %}
 
+{% block header %}
 <h1> Sensor {{ object.name }} </h1>
+{% endblock %}
 
-<p> Range {{ object.min_temperature }} C to  {{ object.max_temperature }} C </p>
-</p> Accuracy {{ object.accuracy }} C</p>
+{% block headlines %}
+<div class="col-xs-6 col-lg-4">
+  <h2>{{ object.sensor.name }} Specs</h2>
+  <p> Range {{ object.min_temperature }} C to  {{ object.max_temperature }} C </p>
+  <p> Accuracy {{ object.accuracy }} C</p>
+</div><!--/.col-xs-6.col-lg-4-->
+{% endblock %}
