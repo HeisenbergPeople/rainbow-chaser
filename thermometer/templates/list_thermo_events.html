@@ -14,33 +14,6 @@
 <a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' %}" role="button">all</a>
 {% endif %}
 
-<div class="row">
-  <div class="col-md-6">
-    <table class="table">
-      <thead>
-        <tr>
-          <th> Date </th>
-          <th> Thermometer </th>
-          <th> Temperature </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for event in events %}
-        <tr>
-          <td> {{ event.datetime|date:"Y M d" }} {{ event.datetime|time:"H:i:s"}} </td>
-          <td> {{ event.thermometer.name }} </td>
-          <td> {{ event.temperature }} </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td> --|-- </td>
-          <td> --|-- </td>
-          <td> --|-- </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+{% include 'event_table.html' with events=events %}
 
 {% endblock %}
