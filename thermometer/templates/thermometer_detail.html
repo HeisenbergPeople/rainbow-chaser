@@ -2,7 +2,9 @@
 
 {% block header %}
 <h1> Thermometer <b>{{ object.name }}</b> </h1>
+{% if desc_len != 0 %}
 <p> {{ object.description }} </p>
+{% endif %}
 {% endblock %}
 
 {% block headlines %}
@@ -11,7 +13,6 @@
    <p><a class="btn btn-default" href="{% url 'sensor_detail' object.sensor.name %}" role="button">Details &raquo;</a></p>
 </div><!--/.col-xs-6.col-lg-4-->
 {% endblock %}
-
 
 {% block content %}
 <h2> Last Events </h2>

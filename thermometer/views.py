@@ -35,7 +35,7 @@ class ThermometerDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ThermometerDetail, self).get_context_data(**kwargs)
-        print context
+        context['desc_len'] = len(context['object'].description)
         return context
 
 class SensorDetail(DetailView):
