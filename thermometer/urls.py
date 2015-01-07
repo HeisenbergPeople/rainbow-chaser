@@ -8,5 +8,6 @@ urlpatterns = patterns('',
                        url(r'^add/(?P<name>.*)/(?P<temperature>.*)/(?P<datetime>.*)$', views.AddEvent.as_view(), name='add_temperature_event'),
                        url(r'^list/$', views.ListEvents.as_view(), name='thermometer_list'),
                        url(r'^list/(?P<name>.*)/$', views.ListEvents.as_view(), name='thermometer_list'),
+                       url(r'^graph/$', views.TemperatureGraph.as_view(), name='temperature_graph'),
 
 )

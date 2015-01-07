@@ -1,0 +1,15 @@
+{% extends 'thermometer_base.html' %}
+{% load jsonify %}
+
+{% block body_include %}
+<script src="/static/d3/d3.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<script>
+var array = {{ jlist }}
+document.write(array)
+</script>
+
+{% endblock %}

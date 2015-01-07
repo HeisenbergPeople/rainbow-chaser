@@ -1,10 +1,13 @@
 import datetime
 
 from django.shortcuts import render
+from django.template import Context
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.list import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.utils import simplejson
+from django.core import serializers
 
 from models import Sensor, Thermometer, Event
 
@@ -75,6 +78,20 @@ class AddEvent(TemplateView):
         except ObjectDoesNotExist:
             print 'Does not exist'
             return HttpResponse('<h1>Illegal thermometer name</h1>')
+
+class TemperatureGraph(TemplateView):
+
+    template_name = 'temperature_graph.html'
+
+    def get(self, request, *args, **kwargs):
+
+        jsonSerializer = serializers.get_serializer("json")
+
+        context = Context({})
+        context['jlist'] = simplejson.dumps(jsonSerializer().serialize(Event.objects.all()))
+
+        return  self.render_to_response(context)
+
 
 class ListEvents(ListView):
     template_name = 'list_thermo_events.html'
