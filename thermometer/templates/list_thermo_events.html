@@ -1,5 +1,17 @@
 {% extends 'thermometer_base.html' %}
 
+{% block scripts %}
+    <link href="/static/jqDataTables/css/jquery.dataTables.css" rel="stylesheet">
+
+<script type="text/javascript" language="javascript" src="/static/jqDataTables/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+{% endblock %}
+
+
 {% block header %}
 <h1>Events</h1>
 <p>Below you can see all the events registered by our thermomethers.</p>
@@ -7,12 +19,14 @@
 
 
 {% block content %}
-{% for thermo in thermometers %}
-<a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' thermo.name %}" role="button">{{ thermo.name }}</a>
-{% endfor %}
-{% if buttons|length > 1 %}
-<a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' %}" role="button">all</a>
-{% endif %}
+
+{% include 'event_filter_form.html' with form=form %}
+<!-- {% for thermo in thermometers %} -->
+<!-- <a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' thermo.name %}" role="button">{{ thermo.name }}</a> -->
+<!-- {% endfor %} -->
+<!-- {% if buttons|length > 1 %} -->
+<!-- <a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' %}" role="button">all</a> -->
+<!-- {% endif %} -->
 
 {% include 'event_table.html' with events=events %}
 
