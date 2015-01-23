@@ -9,5 +9,6 @@ urlpatterns = patterns('',
                        url(r'^list/$', views.ListEvents.as_view(), name='thermometer_list'),
                        url(r'^list/(?P<name>.*)/$', views.ListEvents.as_view(), name='thermometer_list'),
                        url(r'^graph/$', views.TemperatureGraph.as_view(), name='temperature_graph'),
+                       url(r'^ajax_data/$', views.AjaxData.as_view(), name='ajax_data'),
 
 )

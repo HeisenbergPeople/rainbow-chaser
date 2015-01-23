@@ -9,8 +9,14 @@ from django.http import HttpResponse
 from django.utils import simplejson
 from django.core import serializers
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 from models import Sensor, Thermometer, Event
 from forms import EventFilterForm
+
+from serializers import EventSerializer
 
 class MainView(TemplateView):
 
@@ -113,3 +119,18 @@ class ListEvents(ListView):
         context['form'] = EventFilterForm()
 
         return context
+
+class AjaxData(APIView):
+
+    def get(self, request, format=None):
+
+        events = Event.objects.all()
+
+        data = []
+        for event in events:
+
+            data.append([str(event.datetime), event.thermometer.name, event.temperature])
+
+        tableData = { 'data' : data }
+
+        return Response(tableData)

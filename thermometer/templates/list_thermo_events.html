@@ -6,7 +6,9 @@
 <script type="text/javascript" language="javascript" src="/static/jqDataTables/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable( {
+        "ajax": "http://localhost:8000/thermometer/ajax_data/"
+    });
 } );
 </script>
 {% endblock %}
@@ -22,6 +24,6 @@ $(document).ready(function() {
 
 {% include 'event_filter_form.html' with form=form %}
 
-{% include 'event_table.html' with events=events %}
+{% include 'event_table_ajax.html' with events=events %}
 
 {% endblock %}
