@@ -21,12 +21,6 @@ $(document).ready(function() {
 {% block content %}
 
 {% include 'event_filter_form.html' with form=form %}
-<!-- {% for thermo in thermometers %} -->
-<!-- <a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' thermo.name %}" role="button">{{ thermo.name }}</a> -->
-<!-- {% endfor %} -->
-<!-- {% if buttons|length > 1 %} -->
-<!-- <a class="btn btn-lg btn-primary" href="{% url 'thermometer_list' %}" role="button">all</a> -->
-<!-- {% endif %} -->
 
 {% include 'event_table.html' with events=events %}
 

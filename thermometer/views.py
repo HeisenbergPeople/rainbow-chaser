@@ -10,6 +10,7 @@ from django.utils import simplejson
 from django.core import serializers
 
 from models import Sensor, Thermometer, Event
+from forms import EventFilterForm
 
 class MainView(TemplateView):
 
@@ -109,5 +110,6 @@ class ListEvents(ListView):
             context['events'] = self.object_list
 
         context['thermometers'] = Thermometer.objects.all()
+        context['form'] = EventFilterForm()
 
         return context
