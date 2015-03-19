@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+merged_branch=`git symbolic-ref --short -q HEAD`
+
+git rebase master
+rebase_status=$?
+
+if [ $rebase_status != 0 ]; then
+    printf "Error [%d] during test rebase" $rebase_status
+	git rebase --abort
+    exit $rebase_status
+fi
+
+git checkout master
+git merge --no-ff $merged_branch
