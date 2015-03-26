@@ -4,4 +4,14 @@
 
 from django.db import models
 
-# Create your models here.
+
+class Sensor(models.Model):
+    """A sensor measures one kind of thing. A physical device might have
+    multiple logical sensors.
+    """
+
+    name = models.CharField(max_length=256)
+    model = models.CharField(max_length=128)
+
+    class Meta:
+        unique_together = [('name', 'model')]
