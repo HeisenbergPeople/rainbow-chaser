@@ -36,3 +36,12 @@ class GenericEvent(models.Model):
     sensor = models.ForeignKey(GenericSensor)
     datetime = models.DateTimeField()
     value = models.CharField(max_length=128)
+
+
+class Event(models.Model):
+    """Base class for sensor-specific event types"""
+
+    generic_event = models.OneToOneField(GenericEvent)
+
+    class Meta:
+        abstract = True
