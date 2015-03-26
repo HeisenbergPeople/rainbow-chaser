@@ -5,8 +5,10 @@
 from django.db import models
 
 
-class Sensor(models.Model):
-    """A sensor measures one kind of thing. A physical device might have
+class GenericSensor(models.Model):
+    """Represents a sensor abstracting away the specifics of what it measures.
+
+    A sensor measures one kind of thing. A physical device might have
     multiple logical sensors.
     """
 
