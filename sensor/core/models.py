@@ -17,3 +17,12 @@ class GenericSensor(models.Model):
 
     class Meta:
         unique_together = [('name', 'model')]
+
+
+class Sensor(models.Model):
+    """Base class for specific sensor types."""
+
+    generic_sensor = models.OneToOneField(GenericSensor)
+
+    class Meta:
+        abstract = True
