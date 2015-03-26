@@ -26,3 +26,13 @@ class Sensor(models.Model):
 
     class Meta:
         abstract = True
+
+
+class GenericEvent(models.Model):
+    """Represents a measurement event abstracting away what exactly is
+    measured.
+    """
+
+    sensor = models.ForeignKey(GenericSensor)
+    datetime = models.DateTimeField()
+    value = models.CharField(max_length=128)
