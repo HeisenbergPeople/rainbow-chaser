@@ -10,12 +10,13 @@ from django.views.generic import TemplateView, DetailView
 from django.views.generic.list import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.utils import simplejson
 from django.core import serializers
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
+import simplejson
 
 from models import Sensor, Thermometer, Event
 from forms import EventFilterForm
