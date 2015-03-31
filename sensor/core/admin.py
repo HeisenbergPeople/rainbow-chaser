@@ -4,4 +4,8 @@
 
 from django.contrib import admin
 
-# Register your models here.
+from sensor.core.models import GenericSensor, GenericEvent
+
+
+admin.site.register(GenericSensor)
+admin.site.register(GenericEvent)
