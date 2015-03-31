@@ -22,7 +22,7 @@ class GenericSensor(models.Model):
 class Sensor(models.Model):
     """Base class for specific sensor types."""
 
-    generic_sensor = models.OneToOneField(GenericSensor)
+    generic_sensor = models.OneToOneField('core.GenericSensor')
 
     class Meta:
         abstract = True
@@ -33,7 +33,7 @@ class GenericEvent(models.Model):
     measured.
     """
 
-    sensor = models.ForeignKey(GenericSensor)
+    sensor = models.ForeignKey('core.GenericSensor')
     datetime = models.DateTimeField()
     value = models.CharField(max_length=128)
 
@@ -41,7 +41,7 @@ class GenericEvent(models.Model):
 class Event(models.Model):
     """Base class for sensor-specific event types"""
 
-    generic_event = models.OneToOneField(GenericEvent)
+    generic_event = models.OneToOneField('core.GenericEvent')
 
     class Meta:
         abstract = True
