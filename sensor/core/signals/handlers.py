@@ -8,17 +8,19 @@ from django.dispatch import receiver
 from sensor.core.models import GenericSensor, Sensor, Event, GenericEvent
 
 
-@receiver(pre_save)
-@staticmethod
-def create_generic_sensor_for_sensor(model_cls, model_instance, **kwargs):
+
+def create_generic_sensor_for_sensor(**kwargs):
+    model_instance = kwargs['instance']
+
     if isinstance(model_instance, Sensor):
         sensor = model_instance
-        sensor.generic_sensor = GenericSensor.objects.create(name=sensor.name)
+        sensor.generic_sensor = GenericSensor.objects.create(
+            name=sensor.name, sensor_type=sensor.sensor_type)
 
 
-@receiver(pre_save)
-@staticmethod
-def create_generic_event_for_event(model_cls, model_instance, **kwargs):
+def create_generic_event_for_event(**kwargs):
+    model_instance = kwargs['instance']
+
     if isinstance(model_instance, Event):
         event = model_instance
         event.generic_event = GenericEvent.create(
