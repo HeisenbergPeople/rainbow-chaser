@@ -31,8 +31,10 @@ class GenericSensor(models.Model):
 class Sensor(models.Model):
     """Base class for specific sensor types."""
 
-    name = models.CharField(max_length=SENSOR_NAME_MAX_LEN)
     generic_sensor = models.OneToOneField('core.GenericSensor')
+
+    name = models.CharField(max_length=SENSOR_NAME_MAX_LEN)
+    sensor_type = models.ForeignKey('core.SensorType')
 
     class Meta:
         abstract = True
