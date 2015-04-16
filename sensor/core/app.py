@@ -2,4 +2,13 @@
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-default_app_config = 'sensor.core.app.AppConfig'
+# -*- coding: utf-8 -*-
+
+
+from django import apps
+
+
+class AppConfig(apps.AppConfig):
+
+    name = 'sensor.core'
+    verbose_name = 'Sensor Core'
