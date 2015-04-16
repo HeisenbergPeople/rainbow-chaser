@@ -22,7 +22,10 @@ class Event(models.Model):
     """Base class for sensor-specific event types"""
 
     generic_event = models.OneToOneField('core.GenericEvent')
+
+    sensor = models.ForeignKey('core.Sensor')
     datetime = models.DateTimeField()
+
 
     def value_to_string(self):
         """Event.value_to_string() -> unicode
