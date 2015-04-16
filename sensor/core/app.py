@@ -6,9 +6,19 @@
 
 
 from django import apps
+from django.db.models.signals import pre_save
+
+from sensor.core.signals.handlers import (
+    create_generic_sensor_for_sensor,
+    create_generic_event_for_event)
 
 
 class AppConfig(apps.AppConfig):
 
     name = 'sensor.core'
     verbose_name = 'Sensor Core'
+
+    def ready(self):
+
+        pre_save.connect(create_generic_sensor_for_sensor)
+        pre_save.connect(create_generic_event_for_event)
