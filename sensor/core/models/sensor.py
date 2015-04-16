@@ -5,6 +5,9 @@
 from django.db import models
 
 
+SENSOR_NAME_MAX_LEN = 256
+
+
 class SensorType(models.Model):
     """Represents a type of sensors."""
 
@@ -18,7 +21,7 @@ class GenericSensor(models.Model):
     multiple logical sensors belonging to different sensor types.
     """
 
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=SENSOR_NAME_MAX_LEN)
     sensor_type = models.ForeignKey('core.SensorType')
 
     class Meta:
@@ -28,6 +31,7 @@ class GenericSensor(models.Model):
 class Sensor(models.Model):
     """Base class for specific sensor types."""
 
+    name = models.CharField(max_length=SENSOR_NAME_MAX_LEN)
     generic_sensor = models.OneToOneField('core.GenericSensor')
 
     class Meta:
