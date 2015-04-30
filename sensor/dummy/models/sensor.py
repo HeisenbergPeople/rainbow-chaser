@@ -4,9 +4,14 @@
 
 
 from sensor.core.models import Sensor
+from sensor.dummy.forms import DummyEventUploadForm
 
 
 class DummySensor(Sensor):
+
+    @classmethod
+    def event_upload_form(cls):
+        return DummyEventUploadForm
 
     @classmethod
     def sensor_type_name(self):

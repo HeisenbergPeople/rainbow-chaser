@@ -7,7 +7,6 @@
 from django import apps
 
 from sensor.core.views import DataUploadView
-from sensor.dummy.forms import DummyEventUploadForm
 from sensor.dummy.models import DummySensor
 
 
@@ -17,5 +16,4 @@ class AppConfig(apps.AppConfig):
     verbose_name = 'Dummy Sensor'
 
     def ready(self):
-        DataUploadView.register(DummySensor.sensor_type_name(),
-                                DummyEventUploadForm)
+        DataUploadView.register(DummySensor)

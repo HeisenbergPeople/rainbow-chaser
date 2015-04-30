@@ -6,7 +6,7 @@ import json
 
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import View
-from sensor.core.models import GenericSensor
+from sensor.core.models import GenericSensor, Sensor
 
 
 class DataUploadView(View):
@@ -15,12 +15,17 @@ class DataUploadView(View):
     forms = {}
 
     @classmethod
-    def register(cls, sensor_type_name, form_class):
-        """DataUploadView.register(sensor_type_name, model_class, form_class)
+    def register(cls, sensor_class):
+        """DataUploadView.register(sensor_class)
 
         Registers a form and model class with the given sensor type name.
         """
-        cls.forms[sensor_type_name] = form_class
+        if not issubclass(sensor_class, Sensor):
+            raise TypeError('{} is not a subclass of {}'.format(
+                sensor_class, Sensor))
+
+        cls.forms[sensor_class.sensor_type_name()] = \
+            sensor_class.event_upload_form()
 
     def put(self, request, sensor_id):
         sensor_id = int(sensor_id)
