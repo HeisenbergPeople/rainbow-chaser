@@ -37,6 +37,13 @@ class Sensor(models.Model):
     sensor_type = models.ForeignKey('core.SensorType')
 
     @classmethod
+    def event_upload_form(cls):
+        """Sensor.event_upload_form() -> a ModelForm for the
+        sensor-associated Event class
+        """
+        raise NotImplementedError(cls.event_upload_form)
+
+    @classmethod
     def sensor_type_name(cls):
         """Sensor.sensor_type_name() -> string
 
