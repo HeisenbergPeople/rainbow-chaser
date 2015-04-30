@@ -37,13 +37,13 @@ class Sensor(models.Model):
     sensor_type = models.ForeignKey('core.SensorType')
 
     @classmethod
-    def sensor_type_name(self):
+    def sensor_type_name(cls):
         """Sensor.sensor_type_name() -> string
 
         Returns the name of the SensorType associated with this Sensor subclass.
         """
 
-        raise NotImplementedError(self.__class__.sensor_type_name)
+        raise NotImplementedError(cls.sensor_type_name)
 
     class Meta:
         abstract = True

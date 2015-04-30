@@ -5,6 +5,7 @@
 # -*- coding: utf-8 -*-
 
 from django.forms import ModelForm
+
 from sensor.dummy.models import DummyEvent
 
 
