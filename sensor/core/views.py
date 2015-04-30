@@ -14,6 +14,14 @@ class DataUploadView(View):
 
     forms_and_models = {}
 
+    @classmethod
+    def register(cls, sensor_type_name, model_class, form_class):
+        """DataUploadView.register(sensor_type_name, model_class, form_class)
+
+        Registers a form and model class with the given sensor type name.
+        """
+        cls.forms_and_models[sensor_type_name] = (form_class, model_class)
+
     def put(self, request, sensor_id):
         sensor_id = int(sensor_id)
         sensor = GenericSensor.objects.get(pk=sensor_id)
