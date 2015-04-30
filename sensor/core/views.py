@@ -12,20 +12,20 @@ from sensor.core.models import GenericSensor
 class DataUploadView(View):
     """A view for uploading measurements."""
 
-    forms_and_models = {}
+    forms = {}
 
     @classmethod
-    def register(cls, sensor_type_name, model_class, form_class):
+    def register(cls, sensor_type_name, form_class):
         """DataUploadView.register(sensor_type_name, model_class, form_class)
 
         Registers a form and model class with the given sensor type name.
         """
-        cls.forms_and_models[sensor_type_name] = (form_class, model_class)
+        cls.forms[sensor_type_name] = form_class
 
     def put(self, request, sensor_id):
         sensor_id = int(sensor_id)
         sensor = GenericSensor.objects.get(pk=sensor_id)
-        form_class, model_class = self.__class__.forms[sensor.sensor_type.name]
+        form_class = self.__class__.forms[sensor.sensor_type.name]
 
         data = json.loads(request.body)
         form = form_class(data)
@@ -33,6 +33,5 @@ class DataUploadView(View):
         if not form.is_valid():
             return HttpResponse(form.errors.as_json(), status=200)
 
-        model_instance = model_class(**form.cleaned_data)
-        model_instance.save()
+        form.save()
         return HttpResponse(json.dumps({'status': 'ok'}))
