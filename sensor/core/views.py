@@ -35,51 +35,66 @@ class DataUploadView(View):
         try:
             sensor = GenericSensor.objects.get(pk=sensor_id)
         except GenericSensor.DoesNotExist:
-            return JSONResponse({
-                    'status': 'unknown_sensor',
-                    'long_description':
-                        'There is no sensor with id {}'.format(sensor_id),
-                },
-                status=404)
+            return self.sensor_not_found(sensor_id)
 
         except GenericSensor.MultipleObjectsReturned:
-            return JSONResponse({
-                    'status': 'internal_error',
-                },
-                status=500)
+            return self.internal_error()
 
         if not sensor.sensor_type.name in self.__class__.forms:
-            return JSONResponse({
-                    'status': 'unknown_sensor_type',
-                    'long_description':
-                        'The sensor type for this sensor was not registered ' +
-                        'with the data upload view.',
-                },
-                status=500)
+            return self.unknown_sensor_type()
 
         form_class = self.__class__.forms[sensor.sensor_type.name]
 
         try:
             data = json.loads(request.body)
         except ValueError:
-            return JSONResponse({
-                    'status': 'malformed_data',
-                    'long_description': 'The request body was not valid JSON.'
-                },
-                status=400)
+            return self.malformed_data_response()
 
         form = form_class(data)
 
         if not form.is_valid():
-            return JSONResponse({
-                    'status': 'validation_error',
-                    'long_description': 'Data validation has failed.',
-                    'details': form.errors,
-                },
-                status=400)
+            return self.invalid_data(form.errors)
 
         form.save()
-        return HttpResponse(json.dumps({'status': 'ok'}))
+        return JSONResponse({'status': 'ok'})
+
+    def sensor_not_found(self, sensor_id):
+        return JSONResponse({
+            'status': 'unknown_sensor',
+            'long_description':
+                'There is no sensor with id {}'.format(sensor_id),
+            },
+            status=404)
+
+    def internal_error(self):
+        return JSONResponse({
+            'status': 'internal_error',
+            },
+            status=500)
+
+    def unknown_sensor_type(self):
+        return JSONResponse({
+            'status': 'unknown_sensor_type',
+            'long_description':
+                'The sensor type for this sensor was not registered ' +
+                'with the data upload view.',
+            },
+            status=500)
+
+    def malformed_data_response(self):
+        return JSONResponse({
+            'status': 'malformed_data',
+            'long_description': 'The request body was not valid JSON.'
+        },
+        status=400)
+
+    def invalid_data(self, form_errors):
+        return JSONResponse({
+            'status': 'validation_error',
+            'long_description': 'Data validation has failed.',
+            'details': form_errors,
+        },
+        status=400)
 
 
 class JSONResponse(HttpResponse):
