@@ -5,8 +5,17 @@
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-from sensor.core.models import GenericSensor, Sensor, Event, GenericEvent
+from sensor.core.models import GenericSensor, Sensor, Event, GenericEvent, \
+    SensorType
 
+
+def add_missing_sensor_type_to_sensor(**kwargs):
+    model_instance = kwargs['instance']
+
+    if isinstance(model_instance, Sensor):
+        sensor_type_name = model_instance.__class__.sensor_type_name()
+        model_instance.sensor_type, __ = SensorType.objects.get_or_create(
+            name=sensor_type_name)
 
 
 def create_generic_sensor_for_sensor(**kwargs):

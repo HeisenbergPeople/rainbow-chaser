@@ -10,7 +10,7 @@ from django.db.models.signals import pre_save
 
 from sensor.core.signals.handlers import (
     create_generic_sensor_for_sensor,
-    create_generic_event_for_event)
+    create_generic_event_for_event, add_missing_sensor_type_to_sensor)
 
 
 class AppConfig(apps.AppConfig):
@@ -20,5 +20,6 @@ class AppConfig(apps.AppConfig):
 
     def ready(self):
 
+        pre_save.connect(add_missing_sensor_type_to_sensor)
         pre_save.connect(create_generic_sensor_for_sensor)
         pre_save.connect(create_generic_event_for_event)

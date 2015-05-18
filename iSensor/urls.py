@@ -5,13 +5,13 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from sensor.core.views import DataUploadView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'iSensor.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/sensor/(?P<sensor_id>[1-9][0-9]+)/events',
+        DataUploadView.as_view()),
     url(r'^thermometer/', include('thermometer.urls')),
 )
