@@ -23,7 +23,7 @@ class Event(models.Model):
 
     generic_event = models.OneToOneField('core.GenericEvent')
 
-    sensor = models.ForeignKey('core.Sensor')
+    sensor = models.ForeignKey('core.GenericSensor')
     datetime = models.DateTimeField()
 
 
