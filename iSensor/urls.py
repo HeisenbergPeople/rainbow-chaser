@@ -11,7 +11,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/sensor/(?P<sensor_id>[1-9][0-9]+)/events',
-        DataUploadView.as_view()),
+    url(r'^api/sensor/(?P<sensor_id>[1-9][0-9]*)/events',
+        DataUploadView.as_view(), name='data_upload'),
     url(r'^thermometer/', include('thermometer.urls')),
 )
