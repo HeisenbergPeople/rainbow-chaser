@@ -13,6 +13,14 @@ def create_if_not_exist_sensor_type(name):
     return sensor_types[0]
 
 
+def create_if_not_exist_generic_sensor(name, sensor_type):
+    generic_sensors = GenericSensor.objects.filter(name=name, sensor_type=sensor_type)
+    if len(generic_sensors) == 0:
+        generic_sensor = GenericSensor(name=name, sensor_type=sensor_type)
+        generic_sensor.save()
+        return generic_sensor
+    return generic_sensors[0]
+
 class TestDummySensor(TestCase):
 
     def test_dummy_sensor_create(self):
