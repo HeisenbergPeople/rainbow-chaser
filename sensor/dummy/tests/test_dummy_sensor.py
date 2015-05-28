@@ -1,5 +1,6 @@
 from unittest import TestCase
-from sensor.dummy.models import DummySensor
+from sensor.core.models import SensorType, GenericSensor
+from sensor.dummy.models.dummy_sensor import DummySensor
 
 __author__ = 'bradley'
 
@@ -28,6 +29,16 @@ class TestDummySensor(TestCase):
         try:
             sensor = DummySensor()
         except:
-            self.fail()
-
-        self.assertTrue(True)
+            self.fail("Fail create object DummySensor")
+        try:
+            type_name = 'TestType'
+            sensor_type = create_if_not_exist_sensor_type(type_name)
+            sensor.generic_sensor = create_if_not_exist_generic_sensor(type_name, sensor_type)
+            sensor.name = 'Test'
+            sensor.sensor_type = sensor_type
+        except:
+            self.fail("Problem while assign value to attributes")
+        try:
+            sensor.save()
+        except Exception, e:
+            self.fail("Can't save to database %s" % str(e))
