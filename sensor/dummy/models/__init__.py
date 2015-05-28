@@ -5,4 +5,4 @@
 # -*- coding: utf-8 -*-
 
 from sensor.dummy.models.dummy_sensor import DummySensor
-from sensor.dummy.models.event import DummyEvent
+from sensor.dummy.models.dummy_event import DummyEvent

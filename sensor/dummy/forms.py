@@ -6,7 +6,7 @@
 
 from django.forms import ModelForm
 
-from sensor.dummy.models.event import DummyEvent
+from sensor.dummy.models.dummy_event import DummyEvent
 
 
 class DummyEventUploadForm(ModelForm):
