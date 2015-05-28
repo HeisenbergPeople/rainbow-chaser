@@ -13,7 +13,6 @@ class DummySensor(Sensor):
 
         return DummyEventUploadForm
 
-
     @classmethod
-    def sensor_type_name(self):
+    def sensor_type_name(cls):
         return "dummy_sensor"
