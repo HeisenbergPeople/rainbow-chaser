@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'thermometer',
     'sensor.core',
+    'sensor.dummy',
 )
 
 MIDDLEWARE_CLASSES = (
